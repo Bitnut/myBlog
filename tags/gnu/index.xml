@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GNU on 三口一个瓜的博客</title>
+    <link>https://bitnut.github.io/tags/gnu/</link>
+    <description>Recent content in GNU on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 12 May 2021 13:00:28 +0800</lastBuildDate><atom:link href="https://bitnut.github.io/tags/gnu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux Awk 入门（02）</title>
+      <link>https://bitnut.github.io/posts/linux-awk2/</link>
+      <pubDate>Wed, 12 May 2021 13:00:28 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/linux-awk2/</guid>
+      <description>前言 根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。 仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 记录 以及 处理记录，而针对记录，如果我们可以筛选出我们需要的记录，那么无论是程序的执行次数还是编程复杂度都会大大降低。 那么，如何使用 awk 筛选出合适的记录呢？ 一、 基础语法 首</description>
+    </item>
+    
+    <item>
+      <title>Linux Awk 入门（01）</title>
+      <link>https://bitnut.github.io/posts/linux-awk/</link>
+      <pubDate>Wed, 21 Apr 2021 12:00:28 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/linux-awk/</guid>
+      <description>快速入门 awk 一、 awk 的作用、优势和特点 awk 最基础的功能是用作搜索 文件、命令行输出中特定的文本。然后对找到的文本执行指定的操作。 它最大的优势是，它是 linux 等 类 unix 系统下通用的工具，无需额外安装运行时和相关依赖即可使用。而且它 “好读”，“好写” : P。 awk is： refreshingly easy to read and write &amp;ndash; GNU awk get started awk 和其他编程语言的主要区别是，它是数</description>
+    </item>
+    
+    <item>
+      <title>Linux 下 ‘奇怪’ 的 shell</title>
+      <link>https://bitnut.github.io/posts/linux-strange-shell/</link>
+      <pubDate>Fri, 26 Mar 2021 13:29:14 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/linux-strange-shell/</guid>
+      <description>前言 请原谅我的标题党，这篇文章主要聚焦的是 linux shell 中的引号问题。 如果你正在和 shell 打交道，那么了解 shell 中关于引号的问题是一件很有必要的事情。 下面的这些规则适用的对象是 POSIX 兼容的 shell 例如我们常用的 bash（GNU Bourne-Again Shell）。 注： 注意我的措辞，单独的引号的意思是既可以是单引号也可以是双引号。单引号和双引号就是本来</description>
+    </item>
+    
+    <item>
+      <title>Linux 中的软链接和硬链接</title>
+      <link>https://bitnut.github.io/posts/linux-link/</link>
+      <pubDate>Sun, 21 Mar 2021 17:10:40 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/linux-link/</guid>
+      <description>Linux 中的软链接和硬链接 前言 在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过这两个概念结果后来给忘了。这篇文章将通过实例，加深我们对这两个概念的印象。 了解 inode 在理解软/硬链接之前，我们必需了解一下， linux 里面 存储文件 的方式。 对于 linux 有一定了解的</description>
+    </item>
+    
+    <item>
+      <title>代理实践纪录</title>
+      <link>https://bitnut.github.io/posts/proxy-config/</link>
+      <pubDate>Thu, 04 Mar 2021 21:00:35 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/proxy-config/</guid>
+      <description>变化的 GFW 实在是令人很苦恼 在开发和学习的过程中，飞机始终是我们的好朋友。为了不在一些特别的时刻偶尔的失去他，我们也需要不断变化和学习和改进。 配置 Trojan 服务 一、 准备一台 VPS（境外），不需要购买域名和配置证书。 二、 VPS 安装 LINUX 系统. 注意，系统最好是以下几个。其他的发行版本没有做过测试。 ubuntu 16.04+ debian 9 centos 7+ 三、 替换镜像源</description>
+    </item>
+    
+    <item>
+      <title>编译安装 emacs</title>
+      <link>https://bitnut.github.io/posts/emacs-build/</link>
+      <pubDate>Fri, 19 Feb 2021 21:53:55 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/emacs-build/</guid>
+      <description>走个流程 源码下载 到 emacs 的官网下载安装包 当我写这篇博客的时候，emacs 的最新稳定版是 27.1 解压安装包 xz -d emacs-27.1.tar.xz tar -xvf emacs-27.1.tar 配置安装选项 ./configure --prefix=/opt/emacs/ --with-mailutils --with-pop &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 可能会遇到一些依赖保错 可以执行： X toolkit 的报错： sudo apt-get install build-essential texinfo libx11-dev libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libgtk2.0-dev libgtk-3-dev libncurses-dev libxpm-dev automake autoconf gnutls 的报错： sudo apt-get install gnutls-dev 执行 make make &amp;amp;&amp;amp; make install 如果遇到依赖问题： sudo apt-get install make 添加软连接 ln -s /opt/emacs/bin/emacs /usr/bin/emacs 下面给出我写好的</description>
+    </item>
+    
+    <item>
+      <title>认识 Linux 下的 TTY</title>
+      <link>https://bitnut.github.io/posts/linux-tty/</link>
+      <pubDate>Thu, 18 Feb 2021 16:34:47 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/linux-tty/</guid>
+      <description>linux 下的 tty/pty/pts/ptmx (linux 概念系列) tty 是什么？ 在类 unix 系统中， tty 可以被看作是一个命令，但在更常见的情形下， tty 被认为是终端的代称。 tty 在作为命令的情形 随便打开几个终端看看，可以看到下图： 可以看到，输出的结果是一段地址，紧接着， cd 到这个地址下查看： 在 /dev/pts 这个地址下，有几个文件，分别是： 0 / 1 / 2 / 3 / ptmx 几个文件是啥意思？ 在 Linux</description>
+    </item>
+    
+  </channel>
+</rss>

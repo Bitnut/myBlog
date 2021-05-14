@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="referrer" content="no-referrer" />
+	<title>CryptDB  简单原理论述 - 三口一个瓜的博客</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<meta property="og:title" content="CryptDB  简单原理论述" />
+<meta property="og:description" content="博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明 详细论述 CryptDB 的原理 1.面对threat 1 解决方案：通过把对数据库进行的操作（选择，连接，投影等操作）进行特殊处理，使得这些操作能够执行在已加密的数据上 这种解决方案存在的一大问题就是，目前还没有研究出一种加密方式，使得任何执行在数据库上的操作，都能正确运行在加" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://bitnut.github.io/posts/cryptdb1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2017-09-11T08:52:53&#43;08:00" />
+<meta property="article:modified_time" content="2017-09-11T08:52:53&#43;08:00" />
+
+
+	<meta itemprop="name" content="CryptDB  简单原理论述">
+<meta itemprop="description" content="博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明 详细论述 CryptDB 的原理 1.面对threat 1 解决方案：通过把对数据库进行的操作（选择，连接，投影等操作）进行特殊处理，使得这些操作能够执行在已加密的数据上 这种解决方案存在的一大问题就是，目前还没有研究出一种加密方式，使得任何执行在数据库上的操作，都能正确运行在加"><meta itemprop="datePublished" content="2017-09-11T08:52:53&#43;08:00" />
+<meta itemprop="dateModified" content="2017-09-11T08:52:53&#43;08:00" />
+<meta itemprop="wordCount" content="3871">
+<meta itemprop="keywords" content="cryptdb,database," />
+	<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CryptDB  简单原理论述"/>
+<meta name="twitter:description" content="博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明 详细论述 CryptDB 的原理 1.面对threat 1 解决方案：通过把对数据库进行的操作（选择，连接，投影等操作）进行特殊处理，使得这些操作能够执行在已加密的数据上 这种解决方案存在的一大问题就是，目前还没有研究出一种加密方式，使得任何执行在数据库上的操作，都能正确运行在加"/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LMXK0VTF1"></script>
+    <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+
+     gtag('config', 'G-1LMXK0VTF1');
+    </script>
+    </head>
+    <body class="body">
+	<div class="container container--outer">
+	    <header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="三口一个瓜的博客" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/static/gua.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">三口一个瓜的博客</div>
+					<div class="logo__tagline">coding &amp; life</div>
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+	    <div class="wrapper flex">
+		<div class="primary">
+		    
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">CryptDB  简单原理论述</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">三口一个瓜</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2017-09-11T08:52:53&#43;08:00">Mon, 11 Sep 2017 08:52:53 &#43;0800</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E4%B8%93%E9%A2%98/" rel="category">专题</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#博主写的-cryptdb-另外几篇相关文章">博主写的 CryptDB 另外几篇相关文章：</a></li>
+    <li><a href="#1面对threat-1">1.面对threat 1</a>
+      <ul>
+        <li><a href="#1-random-rnd">1. Random (RND)</a></li>
+        <li><a href="#2-deterministic-det">2. Deterministic (DET)</a></li>
+        <li><a href="#3-order-preserving-encryption-ope">3. Order-preserving encryption (OPE).</a></li>
+        <li><a href="#4-homomorphic-encryption-hom">4. Homomorphic encryption (HOM)</a></li>
+        <li><a href="#5-join--join--and-ope--join-">5. Join ( JOIN  and OPE- JOIN )</a></li>
+        <li><a href="#6-word-search-search">6. Word search (SEARCH)</a></li>
+      </ul>
+    </li>
+    <li><a href="#2面对threat-2">2.面对threat 2</a></li>
+    <li><a href="#五参考文献列表">五、参考文献列表</a></li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<h2 id="博主写的-cryptdb-另外几篇相关文章">博主写的 CryptDB 另外几篇相关文章：</h2>
+<p><a href="https://bitnut.github.io/posts/cryptdb-install/">cryptdb 安装及使用说明</a></p>
+<p><a href="https://bitnut.github.io/posts/cryptdb2/">详细论述 CryptDB 的原理</a></p>
+<h2 id="1面对threat-1">1.面对threat 1</h2>
+<ul>
+<li>解决方案：通过把对数据库进行的操作（选择，连接，投影等操作）进行特殊处理，使得这些操作能够执行在已加密的数据上</li>
+</ul>
+<p>这种解决方案存在的一大问题就是，目前还没有研究出一种加密方式，使得任何执行在数据库上的操作，都能正确运行在加密过的数据上。因此就意味着需要在数据库服务端存放多种经过不同方式加密的数据。当用户执行特定操作时，Mysql-proxy就会截获操作请求并使用使用特定的加密方式对该操作进行加密，使得该操作能够正确运行在Server端。</p>
+<p>以下是proxy采用的几种加密算法</p>
+<h3 id="1-random-rnd">1. Random (RND)</h3>
+<p>RND是最安全的一种加密方法，即使是两个相同的明文，也可以映射到不同的密文上面。这种方法可以用来抵抗自适应选择明文攻击，但是缺点就是很难在密文上进行操作。实现方法有AES等，这里不详说。</p>
+<h3 id="2-deterministic-det">2. Deterministic (DET)</h3>
+<p>DET的安全性会相对弱一点，相同的明文映射到相同的密文中，所以可以很方便地对密文进行操作，例如相同值查询等，但是对于不同的表，相同的列，使用的 key 不一定相同。</p>
+<h3 id="3-order-preserving-encryption-ope">3. Order-preserving encryption (OPE).</h3>
+<p>OPE允许数据的顺序查找，它保证当x</p>
+<h3 id="4-homomorphic-encryption-hom">4. Homomorphic encryption (HOM)</h3>
+<p>HOM类型的加密可以使得一些计算可以直接在加密后的数据上面，例如HOMK(x)·HOMK(y) = HOMK(x + y)，这类算法可以保证一些数学运算例如SUM等操作。</p>
+<h3 id="5-join--join--and-ope--join-">5. Join ( JOIN  and OPE- JOIN )</h3>
+<p>这种加密可以支持 join 运算，包括范围 join 以及等值 join （自然连接）。因为在DET中，相同的列，在不同的表中可以用不同的 key 来加密，所以相同的值在不同的表加密后的值不一样。所以此类算法就是为了使加密后的列表能正确地进行连接。</p>
+<h4 id="join-adj">JOIN-ADJ</h4>
+<p>JOIN-ADJ  是一种【对输入确定性的函数】（就是相同的明文对应的一定是相同的 JOIN-ADJ 值），同时也是【可调整的利用秘钥加密之后的hash值】（意思是这个hash值由对应的加密算法生成，而且带有可调整的附加属性的）。</p>
+<h5 id="join-adj-怎么使用">JOIN-ADJ 怎么使用？</h5>
+<p>首先 JOIN-ADJ 是不可置反的。</p>
+<p>因此利用了 JOIN-ADJ 的 JOIN 加密方案由如下所示：</p>
+<p>JOIN (v) = JOIN-ADJ (v) ||  DET(v) （这里的||符号起到连接字符串的作用）</p>
+<p>在这个结构之下，CryptDB 通过比较 JOIN-ADJ (v)来实现比较属性名是否相同，通过解密 DET(v) 来获取被加密的属性值。</p>
+<p>当每次proxy悉知了有新的 JOIN 操作到来，它会向 DBMS 传递一个 key 使得 DBMS 可以调整两个列之间的 JOIN-ADJ 值，使得他们的值趋于一致（就是变成一样的）（当然必须明文要是相同的才行）。一旦他们经过了调整，之后对于这两个列的 JOIN 操作就无需再次调整他们的 JOIN-ADJ 值了，因为他们会将这个值保留，直到需要作出改变为止。</p>
+<p>显然，这里提到的 JOIN 操作是具有可传递性的，AB、AC可以实现 JOIN ，那么BC同样可以。这样 ABC 形成了一个所谓的“可传递组”的概念。</p>
+<p>作者对于可以实现 JOIN 操作的列对的管理是这样实现的：（表名+列名），使得所有在“可传递组”中的列能共享同样的 join-base。</p>
+<p>CryptDB 通过选择两列中字母表顺序第一的列来作为基准，是为了防止发散，通过多次 join 之后，最后可以达到一个稳定的，有共同 join-base的状态，这样就形成一个 transition 组，比较像算法中的迭代法。</p>
+<h3 id="6-word-search-search">6. Word search (SEARCH)</h3>
+<p>这类加密方法允许对密文进行像sql语句中的like语句之类的操作。但是cryptdb只支持一些完整的词汇匹配，不支持任意的相似匹配。Server可以知道是否有信息可以匹配到一个token，但是它无法得知这个token的内容以及匹配到的信息的明文。</p>
+<p>通过上述几种加密算法，明文数据在服务器端被加密保存成对应密文数据。当接收到proxy加密后的操作请求，就会针对对应操作处理并返回密文数据。</p>
+<p>但是这种通过将几种加密方式加密后的密文全部保存在客户端的做法存在的一大问题是，使用多种加密方式在一定程度暴露其关键信息，使得安全性降低。而为了解决这个问题，CryptDB 采用了adjustable-query-based encryption的可调整的基于查询的方式，当需要对某一列相同值进行查询时，就对这一列进行DET加密。而当需要执行某种操作时，就会在proxy端使用相应类型的加密算法后发送给服务端。</p>
+<p>以上的实现需要在提前知道用户所需要执行的所有操作的情况下才能被完全满足。</p>
+<p>但是实际上是很难提前知道你所要做的所有操作。</p>
+<p>这时候就需要洋葱模型，把数据包成一个洋葱，如下图，越外层的加密越安全，而越靠近明文的层提供的功能就越多。所以在一开始，先通过最外层的加密类型，把明文加密成密文保存在客户端，当要用到相应操作的时候，如果当前的所拥有的密文无法满足其操作，就通过一系列算法把洋葱剥开，提供相应的密文进行操作，当下一次要进行同样操作的时候，这时候不需要剥洋葱，只需要用上次的密文进行操作即可。</p>
+<p>对于每一个洋葱，同一列的明文数据通过同一个 key 进行加密，但是对于不同表、不同列使用不同的 key 进行加密。</p>
+<p>（如图，ID列和Name列各自分成了4个洋葱）</p>
+<p>CryptDB 使用自定义函数进行层的解密，如果要只想相同值查找的时候，可以使用名为DECRYPT_RND的自定义函数进行解密：</p>
+<p>解开一层之后，以后对这一列进行相同值查找的时候，就可以直接使用这个密文进行操作。</p>
+<h2 id="2面对threat-2">2.面对threat 2</h2>
+<p>解决威胁二</p>
+<p>当proxy和application端也会受到攻击的时候，需要保证泄露的数据尽可能少。</p>
+<p>CryptDB 提供了以下机制来解决威胁二：</p>
+<p>首先是要向共享数据提供访问控制策略。CryptDB 通过ENC_FOR以及SPEAK_FOR语句提供注释的功能，实现了对共享数据的访问权限进行限制。这一过程形成的 key chain保证了当系统受到攻击的时候，只有登陆中的用户的数据会被泄露，未登陆的用户的数据不会被泄露。</p>
+<p>具体实现方式</p>
+<p>CryptDB 首先需要对主体(principal)的类型进行定义，例如用户，用户组等等。有两种主体，一种是external principal，另一种是internal principal。</p>
+<p>对于external</p>
+<p>principal，需要提供密码给proxy，才能得到相应principal的权限。而internal principal获得权限需要在系统中对其进行授权。</p>
+<p>CryptDB 使用的是自己定义的principal而不是现成的 DBMS 的principles。因为现成的principle提供的定义细粒度不够，不足以满足开发的需求。其二CryptDB 在principle之间需要实现显式的特权授予（SPECK_FOR），这也是现有的 DBMS  principle不能够提供的！</p>
+<p>系统为每个principal都随机生成一个 key ，并且把 key 用相应用户的密码加密后，放在external_ key s表里面，这样当用户之类的改变密码的时候，私密数据的 key 可以不用改变，只需要在external_ key s表中对相应的principal的 key 用用户的新密码进行重新加密。</p>
+<p>当external主体登陆进系统之后，系统会把该用户名以及密码放在一个表cryptdb_active中，密码用于解密相应主体的 key 以读取相关数据。Proxy会把这个表读进内存里面，server端不会得到这个表，并且proxy拦截一切对该表的访问。如果用户没有登陆，就不会出现在此表中，意味着即使proxy受到攻击，表里面的内容泄露了，未登录用户的数据大部分（可能会出现处于同一个principal的人登陆之后泄露数据的情况）不会被泄露，因为密码不在表上面，这样保证了未登录用户的数据。</p>
+<p>但是有一些特例，例如管理员之类的可访问数据比较大（权限很高），很容易会造成大量数据的泄露，所以管理员账号不能随便记录在cryptdb_active表里面，如果管理员要以普通身份登陆的时候，就需要另外分离出一个有相应权限限制的账号，写入cryptdb_active表中，这样可以在大部分时间里防止大量数据的泄露。</p>
+<p>CryptDB 使用两种语句对敏感数据进行注释：</p>
+<p>（1）在表格中对表项用ENC_FOR语句对数据进行注释实现对数据的访问控制。A ENC_FOR B（A是数据，B是主体），意味着只有主体B可以访问数据A，ENC_FOR的实现原理是用主体B的 key 对数据A进行加密。</p>
+<p>（2）利用SPEAK_FOR语句对表格进行注释，给一个主体授予另一个主体的权限。这种做法的格式为(a x) SEPAK_FOR (b y),其中x和y为主体类型，a和b是主体。意思是x类型的主体a有y类型的主体b的权限，b能访问的内容，a也有权限访问。</p>
+<p>SPEAK_FOR的实现原理是用主体a的 key 对主体b的 key 进行加密，当需要访问相应数据的时候，可以通过主体a的 key 对主体b的 key 进行解密，然后通过主体b的 key 对相应数据进行访问。当主体A通过SPEAK_FOR语句与主体B相连的时候，主体B的 key 会用主体A的 key 加密，然后放在一个特殊的表access_ key 表上面。但是数据的加密在共享数据双方都在线的情况下采用对称密钥（加密和解密的密钥相同）进行加密，而当某一个主体没有登陆进系统的时候，无法得到该主体的symmetric  key ，所以这个时候会采用公钥加密数据并保存，当主体再次登录的时候使用自己的私钥进行解密，获得数据。多个SPEAK_FOR就形成一条 key  chain，要找某个数据的时候，只需要顺着 key  chain，从用户密码，一直找到要找的数据为止。</p>
+<p>每当敌方想要通过更改SPEAKS_FOR来窥探隐私信息的时候，CryptDB 的机制告诉我们，需要对access_ key s表格进行相应的更改，想要更改这个表格必须获得被授权principle的 key ，这就意味着只有这个principle登录的时候，敌方才能获取相应的 key 从而对这个principle的私密信息进行窥探。</p>
+<h2 id="五参考文献列表">五、参考文献列表</h2>
+<ol>
+<li>
+<p>极简密码学,by曾兵</p>
+</li>
+<li>
+<p>CryptDB .Popa, R. A., et al. (2011). CryptDB : protecting confidentiality withencrypted query processing. Proceedings of the Twenty-Third ACM Symposium onOperating Systems Principles. Cascais, Portugal, ACM: 85-100</p>
+</li>
+<li>
+<p><a href="https://eprint.iacr.org/2015/979">Guidelines for Using the CryptDB  SystemSecurely</a></p>
+</li>
+<li>
+<p><a href="http://css.csail.mit.edu/cryptdb/">CryptDB 项目主页:</a></p>
+</li>
+<li>
+<p><a href="https://people.eecs.berkeley.edu/~raluca/">CryptDB 发明人主页:</a></p>
+</li>
+</ol>
+
+		</div>
+                <div id="img-viewer-container">
+                    <div class="img-viewer-mask"></div>
+                    <div class="img-viewer">
+                        <ul class="img-list"></ul>
+                    </div>
+                </div>
+
+		<footer class="post__footer">
+		    
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/cryptdb/" rel="tag">cryptdb</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/database/" rel="tag">database</a>
+		</li>
+	</ul>
+</div>
+                    <section class="share-buttons-container">
+    <a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="large" target="_blank">Tweet</a>
+    <script>window.twttr = (function(d, s, id) {
+         var js, fjs = d.getElementsByTagName(s)[0],
+             t = window.twttr || {};
+         if (d.getElementById(id)) return t;
+         js = d.createElement(s);
+         js.id = id;
+         js.src = "https://platform.twitter.com/widgets.js";
+         fjs.parentNode.insertBefore(js, fjs);
+
+         t._e = [];
+         t.ready = function(f) {
+             t._e.push(f);
+         };
+
+         return t;
+     }(document, "script", "twitter-wjs"));</script>
+</section>
+
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                    <script src="https://utteranc.es/client.js"
+                            repo="Bitnut/comment"
+                            issue-term="pathname"
+                            theme="github-light"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+                    <link rel="stylesheet" href="https://bitnut.github.io/js/custom.js">
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<div class="authorbox__header">
+		<span class="authorbox__name">About 三口一个瓜</span>
+	</div>
+	<div class="authorbox__description">
+		你好，我是三口一个瓜。你也可以叫我瓜。我是一名程序员，emacs 爱好者，平时喜欢健身、跑步, 同时我也是一名口琴初学者。我现在居住和工作在 中国，深圳。如果想要联系我，请发 email。
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/posts/cryptdb2/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">详细论述 CryptDB 的原理</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/posts/zhouyi/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">浅谈《周易》</p>
+		</a>
+	</div>
+</nav>
+<section class="comments">
+    
+</section>
+
+
+		</div>
+		<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH…" value="" name="q" aria-label="SEARCH…">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="https://bitnut.github.io" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/linux-awk2/">Linux Awk 入门（02）</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/linux-awk/">Linux Awk 入门（01）</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/socks5-protocal/">Socks5 协议详解（经典设计）</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/jianshu403/">解决 http 访问简书图片资源 403 问题</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/switchtohugo/">解决 hugo 博客框架下 中文简介、评论、扩展配置 的问题</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/linux-strange-shell/">Linux 下 ‘奇怪’ 的 shell</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/linux-link/">Linux 中的软链接和硬链接</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/ruinyourtscode/">如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/proxy-config/">代理实践纪录</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/linux-ps/">Linux 下的 ps 命令和常用组合</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/%E4%B8%93%E9%A2%98/">专题</a></li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1/">经典设计</a></li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/awk/" title="Awk">Awk</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog/" title="blog">blog</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cryptdb/" title="cryptdb">cryptdb</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/css/" title="css">css</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/database/" title="database">database</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/emacs/" title="emacs">emacs</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/frontend/" title="frontend">frontend</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/gnu/" title="GNU">GNU</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/html5/" title="html5">html5</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="http">http</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="HUGO">HUGO</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="linux">linux</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ms/" title="MS">MS</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/node/" title="node">node</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protocal/" title="Protocal">Protocal</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ts/" title="ts">ts</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/web/" title="web">web</a>
+	</div>
+</div>
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/Bitnut" target="_blank">
+				<svg class="widget-social__link-icon icon icon-github" width="24" height="24" viewBox="0 0 384 374"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitLab" rel="noopener noreferrer" href="https://gitlab.com/Bitnut" target="_blank">
+				<svg class="widget-social__link-icon icon icon-gitlab" width="24" height="24" viewBox="0 0 265 265"><path d="M128.075 236.075l47.104-144.97H80.97l47.104 144.97z M14.956 91.104L.642 135.16a9.752 9.752 0 0 0 3.542 10.903l123.891 90.012-113.12-144.97z M14.956 91.105H80.97L52.601 3.79c-1.46-4.493-7.816-4.492-9.275 0l-28.37 87.315z M241.194 91.104l14.314 44.056a9.752 9.752 0 0 1-3.543 10.903l-123.89 90.012 113.119-144.97z M241.194 91.105h-66.015l28.37-87.315c1.46-4.493 7.816-4.492 9.275 0l28.37 87.315z"/></svg>
+				<span>GitLab</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:940095072@qq.com">
+				<svg class="widget-social__link-icon icon icon-mail" width="24" height="24" viewBox="0 0 416 288"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>940095072@qq.com</span>
+			</a>
+		</div>
+
+		
+	</div>
+</div>
+</aside>
+	    </div>
+	    <footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 三口一个瓜.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+        <script async defer src="/js/menu.js"></script>
+        <script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

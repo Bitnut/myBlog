@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Awk on 三口一个瓜的博客</title>
+    <link>https://bitnut.github.io/tags/awk/</link>
+    <description>Recent content in Awk on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 12 May 2021 13:00:28 +0800</lastBuildDate><atom:link href="https://bitnut.github.io/tags/awk/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux Awk 入门（02）</title>
+      <link>https://bitnut.github.io/posts/linux-awk2/</link>
+      <pubDate>Wed, 12 May 2021 13:00:28 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/linux-awk2/</guid>
+      <description>前言 根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。 仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 记录 以及 处理记录，而针对记录，如果我们可以筛选出我们需要的记录，那么无论是程序的执行次数还是编程复杂度都会大大降低。 那么，如何使用 awk 筛选出合适的记录呢？ 一、 基础语法 首</description>
+    </item>
+    
+    <item>
+      <title>Linux Awk 入门（01）</title>
+      <link>https://bitnut.github.io/posts/linux-awk/</link>
+      <pubDate>Wed, 21 Apr 2021 12:00:28 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/linux-awk/</guid>
+      <description>快速入门 awk 一、 awk 的作用、优势和特点 awk 最基础的功能是用作搜索 文件、命令行输出中特定的文本。然后对找到的文本执行指定的操作。 它最大的优势是，它是 linux 等 类 unix 系统下通用的工具，无需额外安装运行时和相关依赖即可使用。而且它 “好读”，“好写” : P。 awk is： refreshingly easy to read and write &amp;ndash; GNU awk get started awk 和其他编程语言的主要区别是，它是数</description>
+    </item>
+    
+  </channel>
+</rss>

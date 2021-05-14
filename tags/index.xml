@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on 三口一个瓜的博客</title>
+    <link>https://bitnut.github.io/tags/</link>
+    <description>Recent content in Tags on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 12 May 2021 13:00:28 +0800</lastBuildDate><atom:link href="https://bitnut.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Awk</title>
+      <link>https://bitnut.github.io/tags/awk/</link>
+      <pubDate>Wed, 12 May 2021 13:00:28 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/tags/awk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GNU</title>
+      <link>https://bitnut.github.io/tags/gnu/</link>
+      <pubDate>Wed, 12 May 2021 13:00:28 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/tags/gnu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>https://bitnut.github.io/tags/linux/</link>
+      <pubDate>Wed, 12 May 2021 13:00:28 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Protocal</title>
+      <link>https://bitnut.github.io/tags/protocal/</link>
+      <pubDate>Mon, 12 Apr 2021 22:13:37 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/tags/protocal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>web</title>
+      <link>https://bitnut.github.io/tags/web/</link>
+      <pubDate>Mon, 12 Apr 2021 22:13:37 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/tags/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>html5</title>
+      <link>https://bitnut.github.io/tags/html5/</link>
+      <pubDate>Sun, 11 Apr 2021 09:44:50 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/tags/html5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>http</title>
+      <link>https://bitnut.github.io/tags/http/</link>
+      <pubDate>Sun, 11 Apr 2021 09:44:50 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/tags/http/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blog</title>
+      <link>https://bitnut.github.io/tags/blog/</link>
+      <pubDate>Fri, 09 Apr 2021 18:53:13 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HUGO</title>
+      <link>https://bitnut.github.io/tags/hugo/</link>
+      <pubDate>Fri, 09 Apr 2021 18:53:13 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MS</title>
+      <link>https://bitnut.github.io/tags/ms/</link>
+      <pubDate>Sat, 20 Mar 2021 19:11:51 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/tags/ms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>node</title>
+      <link>https://bitnut.github.io/tags/node/</link>
+      <pubDate>Sat, 20 Mar 2021 19:11:51 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/tags/node/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ts</title>
+      <link>https://bitnut.github.io/tags/ts/</link>
+      <pubDate>Sat, 20 Mar 2021 19:11:51 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/tags/ts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>emacs</title>
+      <link>https://bitnut.github.io/tags/emacs/</link>
+      <pubDate>Fri, 19 Feb 2021 21:53:55 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/tags/emacs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>frontend</title>
+      <link>https://bitnut.github.io/tags/frontend/</link>
+      <pubDate>Thu, 14 Jan 2021 22:20:01 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/tags/frontend/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>css</title>
+      <link>https://bitnut.github.io/tags/css/</link>
+      <pubDate>Thu, 30 Apr 2020 00:01:55 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/tags/css/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cryptdb</title>
+      <link>https://bitnut.github.io/tags/cryptdb/</link>
+      <pubDate>Mon, 11 Sep 2017 08:52:53 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/tags/cryptdb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>database</title>
+      <link>https://bitnut.github.io/tags/database/</link>
+      <pubDate>Mon, 11 Sep 2017 08:52:53 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/tags/database/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

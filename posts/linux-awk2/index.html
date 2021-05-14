@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="referrer" content="no-referrer" />
+	<title>Linux Awk 入门（02） - 三口一个瓜的博客</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<meta property="og:title" content="Linux Awk 入门（02）" />
+<meta property="og:description" content="前言 根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。 仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 记录 以及 处理记录，而针对记录，如果我们可以筛选出我们需要的记录，那么无论是程序的执行次数还是编程复杂度都会大大降低。 那么，如何使用 awk 筛选出合适的记录呢？ 一、 基础语法 首" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://bitnut.github.io/posts/linux-awk2/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-05-12T13:00:28&#43;08:00" />
+<meta property="article:modified_time" content="2021-05-12T13:00:28&#43;08:00" />
+
+
+	<meta itemprop="name" content="Linux Awk 入门（02）">
+<meta itemprop="description" content="前言 根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。 仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 记录 以及 处理记录，而针对记录，如果我们可以筛选出我们需要的记录，那么无论是程序的执行次数还是编程复杂度都会大大降低。 那么，如何使用 awk 筛选出合适的记录呢？ 一、 基础语法 首"><meta itemprop="datePublished" content="2021-05-12T13:00:28&#43;08:00" />
+<meta itemprop="dateModified" content="2021-05-12T13:00:28&#43;08:00" />
+<meta itemprop="wordCount" content="1175">
+<meta itemprop="keywords" content="GNU,Linux,Awk," />
+	<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux Awk 入门（02）"/>
+<meta name="twitter:description" content="前言 根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。 仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 记录 以及 处理记录，而针对记录，如果我们可以筛选出我们需要的记录，那么无论是程序的执行次数还是编程复杂度都会大大降低。 那么，如何使用 awk 筛选出合适的记录呢？ 一、 基础语法 首"/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LMXK0VTF1"></script>
+    <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+
+     gtag('config', 'G-1LMXK0VTF1');
+    </script>
+    </head>
+    <body class="body">
+	<div class="container container--outer">
+	    <header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="三口一个瓜的博客" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/static/gua.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">三口一个瓜的博客</div>
+					<div class="logo__tagline">coding &amp; life</div>
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+	    <div class="wrapper flex">
+		<div class="primary">
+		    
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Linux Awk 入门（02）</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">三口一个瓜</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-05-12T13:00:28&#43;08:00">Wed, 12 May 2021 13:00:28 &#43;0800</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E4%B8%93%E9%A2%98/" rel="category">专题</a>, <a class="meta__link" href="/categories/%E6%95%99%E7%A8%8B/" rel="category">教程</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#一-基础语法">一、 基础语法</a>
+      <ul>
+        <li><a href="#1-基本运算符">1. 基本运算符</a></li>
+        <li><a href="#2-与或非">2. 与或非</a></li>
+        <li><a href="#3-正则匹配">3. 正则匹配</a></li>
+        <li><a href="#3-内置变量">3. 内置变量</a></li>
+      </ul>
+    </li>
+    <li><a href="#二实战案例">二、实战案例</a>
+      <ul>
+        <li><a href="#1-初步过滤记录">1. 初步过滤记录</a></li>
+        <li><a href="#2-获取真正需要的记录">2. 获取真正需要的记录</a></li>
+        <li><a href="#拓展资料">拓展资料</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<p><img src="/static/linux-awk/gnu-awk.png" alt="gun-awk"></p>
+<h2 id="前言">前言</h2>
+<p>根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。</p>
+<p>仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 <code>记录</code> 以及 <code>处理记录</code>，而针对记录，如果我们可以筛选出我们需要的记录，那么无论是程序的执行次数还是编程复杂度都会大大降低。</p>
+<p>那么，如何使用 awk 筛选出合适的记录呢？</p>
+<h2 id="一-基础语法">一、 基础语法</h2>
+<p>首先，让我们来掌握一些基本的工具。</p>
+<h3 id="1-基本运算符">1. 基本运算符</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">涵义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">数学运算符</td>
+<td style="text-align:center">加法</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">数学运算符</td>
+<td style="text-align:center">减法</td>
+</tr>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">数学运算符</td>
+<td style="text-align:center">乘法</td>
+</tr>
+<tr>
+<td style="text-align:center">/</td>
+<td style="text-align:center">数学运算符</td>
+<td style="text-align:center">除法</td>
+</tr>
+<tr>
+<td style="text-align:center">%</td>
+<td style="text-align:center">数学运算符</td>
+<td style="text-align:center">取余</td>
+</tr>
+<tr>
+<td style="text-align:center"><!-- raw HTML omitted --></td>
+<td style="text-align:center">字符串</td>
+<td style="text-align:center">连接</td>
+</tr>
+</tbody>
+</table>
+<p>使用值： &ldquo;7&rdquo; 和 &ldquo;3&rdquo; 得到的结果是：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">表达式</th>
+<th style="text-align:center">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">7 + 3</td>
+<td style="text-align:center">10</td>
+</tr>
+<tr>
+<td style="text-align:center">7 - 3</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">7 * 3</td>
+<td style="text-align:center">21</td>
+</tr>
+<tr>
+<td style="text-align:center">7 / 3</td>
+<td style="text-align:center">2.33333</td>
+</tr>
+<tr>
+<td style="text-align:center">7 % 3</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">7 3</td>
+<td style="text-align:center">73</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-与或非">2. 与或非</h3>
+<p>和大多数语言一样， awk 中使用 <code>&amp;&amp;</code> <code>||</code> <code>!</code> 分别表示 <code>与</code> <code>或</code> <code>非</code>。</p>
+<h3 id="3-正则匹配">3. 正则匹配</h3>
+<p>| 运算符 | 涵义   |
+| ~      | 匹配   |
+| !~     | 不匹配 |</p>
+<p>awk 支持 <a href="https://www.gnu.org/software/grep/manual/html_node/Basic-vs-Extended.html">extended regular expressions</a>，且表达式必需被下划线: <code>//</code> 包裹。</p>
+<p>案例如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-awk" data-lang="awk"><span style="color:#a6e22e">foo</span> <span style="color:#f92672">!~</span> <span style="color:#e6db74">/Hello/</span>
+<span style="color:#a6e22e">bar</span> <span style="color:#f92672">~</span> <span style="color:#e6db74">/(one|two|three)/</span>
+</code></pre></div><h3 id="3-内置变量">3. 内置变量</h3>
+<p>其实到这里我们已经可以进入到实战中了，不希望花太多时间的话，现在就可以跳到下一章开始实战。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">变量</th>
+<th style="text-align:center">涵义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$0</td>
+<td style="text-align:center">当前记录（这个变量中存放着整个行的内容）</td>
+</tr>
+<tr>
+<td style="text-align:center">$1~$n</td>
+<td style="text-align:center">当前记录的第 n 个字段，字段间由 FS 分隔</td>
+</tr>
+<tr>
+<td style="text-align:center">FS</td>
+<td style="text-align:center">输入字段分隔符 默认是空格或 Tab</td>
+</tr>
+<tr>
+<td style="text-align:center">NF</td>
+<td style="text-align:center">当前记录中的字段个数，就是有多少列</td>
+</tr>
+<tr>
+<td style="text-align:center">NR</td>
+<td style="text-align:center">已经读出的记录数，就是行号，从 1 开始，如果有多个文件话，这个值也是不断累加中。</td>
+</tr>
+<tr>
+<td style="text-align:center">FNR</td>
+<td style="text-align:center">当前记录数，与 NR 不同的是，这个值会是各个文件自己的行号</td>
+</tr>
+<tr>
+<td style="text-align:center">RS</td>
+<td style="text-align:center">输入的记录分隔符， 默认为换行符</td>
+</tr>
+<tr>
+<td style="text-align:center">OFS</td>
+<td style="text-align:center">输出字段分隔符， 默认也是空格</td>
+</tr>
+<tr>
+<td style="text-align:center">ORS</td>
+<td style="text-align:center">输出的记录分隔符，默认为换行符</td>
+</tr>
+<tr>
+<td style="text-align:center">FILENAME</td>
+<td style="text-align:center">当前输入文件的名字</td>
+</tr>
+</tbody>
+</table>
+<h2 id="二实战案例">二、实战案例</h2>
+<p>ok 我们已经了解到匹配模式的最基本工具了，运算符 &amp; 正则 &amp; 内置变量构成模式，比较运算符规定匹配方式。我们就得到了 n 多匹配的 <code>规则</code>，也就是前文提到的 <code>pattern</code>。</p>
+<p>下面开始实战。</p>
+<p>首先，把一些打印放到文件里。</p>
+<p>我选择了分析 <code>netstat</code> 这个命令输出的一部分：</p>
+<h3 id="1-初步过滤记录">1. 初步过滤记录</h3>
+<p>我们仅希望得到有关当前系统中<code>网络链接</code>的具体信息。</p>
+<p><code>$ netstat | awk '$1!~/Active|unix/ &amp;&amp; NF!=7' &gt; netstat</code></p>
+<p>我的输出如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">Proto Recv-Q Send-Q Local Address           Foreign Address         State
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:57380       142.250.101.188:5228    ESTABLISHED
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:https       113.66.33.4:57869       ESTABLISHED
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:37290       152.199.4.33:https      ESTABLISHED
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:55242       40.91.80.66:https       TIME_WAIT
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:https       113.66.33.4:54114       ESTABLISHED
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:48186       142.250.101.188:https   ESTABLISHED
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:ssh         113.66.33.4:58356       ESTABLISHED
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:https       113.66.33.4:57313       TIME_WAIT
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:37552       server-52-85-193-:https ESTABLISHED
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:https       113.66.33.4:54168       ESTABLISHED
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:38470       42.186.18.104:http      TIME_WAIT
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:https       113.66.33.4:40763       TIME_WAIT
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:39704       lb-140-82-114-25-:https ESTABLISHED
+tcp        <span style="color:#ae81ff">0</span>     <span style="color:#ae81ff">48</span> 193.9.44.77:ssh         113.66.33.4:58242       ESTABLISHED
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:44800       ec2-18-208-101-52:https ESTABLISHED
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:https       113.66.33.4:54133       ESTABLISHED
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:43774       74.125.137.188:5228     FIN_WAIT2
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:https       113.66.33.4:56067       ESTABLISHED
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:https       113.66.33.4:9964        ESTABLISHED
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:53038       52.167.249.196:https    TIME_WAIT
+tcp        <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span> 193.9.44.77:https       113.66.33.4:54068       TIME_WAIT
+</code></pre></div><p>其中，<code>$1!~/Active|unix/</code> 使用了简单的正则匹配，过滤了非网络链接的信息以及一些提示信息</p>
+<p><code>NF!=7  {print $0}'</code> 使用了内置变量 <code>NF</code> 代表每行的记录数，过滤了超过七列的记录。</p>
+<p><code>print $0</code> 打印了一整行记录。其实在我们的这个情形中，也可以不用这个打印语句，达到同样的效果。</p>
+<h3 id="2-获取真正需要的记录">2. 获取真正需要的记录</h3>
+<ul>
+<li>例:</li>
+</ul>
+<p>获取 <code>State</code> 是 <code>TIME_WAIT</code> 的 使用 <code>https</code> 的记录的第 2/3/4/5 列：</p>
+<p><code>awk '$6==&quot;TIME_WAIT&quot; &amp;&amp; $5~/.*:https/ {printf &quot;%-8s %-8s %-18s %-22s\n&quot;,$2,$3,$4,$5}' netstat</code></p>
+<p>得到打印结果：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ae81ff">0</span>        <span style="color:#ae81ff">0</span>        193.9.44.77:55242  40.91.80.66:https
+<span style="color:#ae81ff">0</span>        <span style="color:#ae81ff">0</span>        193.9.44.77:53038  52.167.249.196:https
+</code></pre></div><h3 id="拓展资料">拓展资料</h3>
+<p>其实到这里，我们可以说对 awk 已经初步入门了。对上面提到的一些技术细节感兴趣，或者需要的朋友可以到 gawk 的文档看看。</p>
+<p>例如：</p>
+<ul>
+<li><a href="https://www.gnu.org/software/gawk/manual/gawk.html#Built_002din-Variables">内建变量</a></li>
+<li><a href="https://www.gnu.org/software/gawk/manual/gawk.html#Regexp">正则</a></li>
+</ul>
+<h1 id="参考资料">参考资料</h1>
+<p>[1] <a href="https://www.gnu.org/software/gawk/manual/gawk.html">GNU awk guide</a></p>
+<p>[2] <a href="https://www.grymoire.com/Unix/Awk.html#toc_Awk">awk tutorial</a></p>
+
+		</div>
+                <div id="img-viewer-container">
+                    <div class="img-viewer-mask"></div>
+                    <div class="img-viewer">
+                        <ul class="img-list"></ul>
+                    </div>
+                </div>
+
+		<footer class="post__footer">
+		    
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/gnu/" rel="tag">GNU</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/linux/" rel="tag">Linux</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/awk/" rel="tag">Awk</a>
+		</li>
+	</ul>
+</div>
+                    <section class="share-buttons-container">
+    <a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="large" target="_blank">Tweet</a>
+    <script>window.twttr = (function(d, s, id) {
+         var js, fjs = d.getElementsByTagName(s)[0],
+             t = window.twttr || {};
+         if (d.getElementById(id)) return t;
+         js = d.createElement(s);
+         js.id = id;
+         js.src = "https://platform.twitter.com/widgets.js";
+         fjs.parentNode.insertBefore(js, fjs);
+
+         t._e = [];
+         t.ready = function(f) {
+             t._e.push(f);
+         };
+
+         return t;
+     }(document, "script", "twitter-wjs"));</script>
+</section>
+
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                    <script src="https://utteranc.es/client.js"
+                            repo="Bitnut/comment"
+                            issue-term="pathname"
+                            theme="github-light"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+                    <link rel="stylesheet" href="https://bitnut.github.io/js/custom.js">
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<div class="authorbox__header">
+		<span class="authorbox__name">About 三口一个瓜</span>
+	</div>
+	<div class="authorbox__description">
+		你好，我是三口一个瓜。你也可以叫我瓜。我是一名程序员，emacs 爱好者，平时喜欢健身、跑步, 同时我也是一名口琴初学者。我现在居住和工作在 中国，深圳。如果想要联系我，请发 email。
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/posts/linux-awk/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Linux Awk 入门（01）</p>
+		</a>
+	</div>
+</nav>
+<section class="comments">
+    
+</section>
+
+
+		</div>
+		<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH…" value="" name="q" aria-label="SEARCH…">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="https://bitnut.github.io" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/linux-awk2/">Linux Awk 入门（02）</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/linux-awk/">Linux Awk 入门（01）</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/socks5-protocal/">Socks5 协议详解（经典设计）</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/jianshu403/">解决 http 访问简书图片资源 403 问题</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/switchtohugo/">解决 hugo 博客框架下 中文简介、评论、扩展配置 的问题</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/linux-strange-shell/">Linux 下 ‘奇怪’ 的 shell</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/linux-link/">Linux 中的软链接和硬链接</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/ruinyourtscode/">如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/proxy-config/">代理实践纪录</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/linux-ps/">Linux 下的 ps 命令和常用组合</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">Categories</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/%E4%B8%93%E9%A2%98/">专题</a></li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1/">经典设计</a></li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/awk/" title="Awk">Awk</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/blog/" title="blog">blog</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cryptdb/" title="cryptdb">cryptdb</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/css/" title="css">css</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/database/" title="database">database</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/emacs/" title="emacs">emacs</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/frontend/" title="frontend">frontend</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/gnu/" title="GNU">GNU</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/html5/" title="html5">html5</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="http">http</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="HUGO">HUGO</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linux/" title="linux">linux</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ms/" title="MS">MS</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/node/" title="node">node</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/protocal/" title="Protocal">Protocal</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ts/" title="ts">ts</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/web/" title="web">web</a>
+	</div>
+</div>
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">Social</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/Bitnut" target="_blank">
+				<svg class="widget-social__link-icon icon icon-github" width="24" height="24" viewBox="0 0 384 374"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitLab" rel="noopener noreferrer" href="https://gitlab.com/Bitnut" target="_blank">
+				<svg class="widget-social__link-icon icon icon-gitlab" width="24" height="24" viewBox="0 0 265 265"><path d="M128.075 236.075l47.104-144.97H80.97l47.104 144.97z M14.956 91.104L.642 135.16a9.752 9.752 0 0 0 3.542 10.903l123.891 90.012-113.12-144.97z M14.956 91.105H80.97L52.601 3.79c-1.46-4.493-7.816-4.492-9.275 0l-28.37 87.315z M241.194 91.104l14.314 44.056a9.752 9.752 0 0 1-3.543 10.903l-123.89 90.012 113.119-144.97z M241.194 91.105h-66.015l28.37-87.315c1.46-4.493 7.816-4.492 9.275 0l28.37 87.315z"/></svg>
+				<span>GitLab</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:940095072@qq.com">
+				<svg class="widget-social__link-icon icon icon-mail" width="24" height="24" viewBox="0 0 416 288"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>940095072@qq.com</span>
+			</a>
+		</div>
+
+		
+	</div>
+</div>
+</aside>
+	    </div>
+	    <footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 三口一个瓜.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+        <script async defer src="/js/menu.js"></script>
+        <script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

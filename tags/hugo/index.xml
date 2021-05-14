@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HUGO on 三口一个瓜的博客</title>
+    <link>https://bitnut.github.io/tags/hugo/</link>
+    <description>Recent content in HUGO on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 09 Apr 2021 18:53:13 +0800</lastBuildDate><atom:link href="https://bitnut.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>解决 hugo 博客框架下 中文简介、评论、扩展配置 的问题</title>
+      <link>https://bitnut.github.io/posts/switchtohugo/</link>
+      <pubDate>Fri, 09 Apr 2021 18:53:13 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/switchtohugo/</guid>
+      <description>前言 前段时间把博客主题切换到了 hugo，但同时也遇到了一些需要自己去折腾的问题。 例如，安装的主题貌似对中文支持不太好，安装的主题没有搭配除了 disqus 以外的评论插件怎么办，流量统计怎么做，安装的主题图片展示效果较差怎么办？ 这篇文章主要就是为了讨论这个问题。 识别问题 以上的问题属于是具体问题。虽然可以具体问题具</description>
+    </item>
+    
+  </channel>
+</rss>

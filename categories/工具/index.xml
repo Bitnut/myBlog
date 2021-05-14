@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>工具 on 三口一个瓜的博客</title>
+    <link>https://bitnut.github.io/categories/%E5%B7%A5%E5%85%B7/</link>
+    <description>Recent content in 工具 on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 04 Mar 2021 21:00:35 +0800</lastBuildDate><atom:link href="https://bitnut.github.io/categories/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>代理实践纪录</title>
+      <link>https://bitnut.github.io/posts/proxy-config/</link>
+      <pubDate>Thu, 04 Mar 2021 21:00:35 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/proxy-config/</guid>
+      <description>变化的 GFW 实在是令人很苦恼 在开发和学习的过程中，飞机始终是我们的好朋友。为了不在一些特别的时刻偶尔的失去他，我们也需要不断变化和学习和改进。 配置 Trojan 服务 一、 准备一台 VPS（境外），不需要购买域名和配置证书。 二、 VPS 安装 LINUX 系统. 注意，系统最好是以下几个。其他的发行版本没有做过测试。 ubuntu 16.04+ debian 9 centos 7+ 三、 替换镜像源</description>
+    </item>
+    
+    <item>
+      <title>编译安装 emacs</title>
+      <link>https://bitnut.github.io/posts/emacs-build/</link>
+      <pubDate>Fri, 19 Feb 2021 21:53:55 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/emacs-build/</guid>
+      <description>走个流程 源码下载 到 emacs 的官网下载安装包 当我写这篇博客的时候，emacs 的最新稳定版是 27.1 解压安装包 xz -d emacs-27.1.tar.xz tar -xvf emacs-27.1.tar 配置安装选项 ./configure --prefix=/opt/emacs/ --with-mailutils --with-pop &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 可能会遇到一些依赖保错 可以执行： X toolkit 的报错： sudo apt-get install build-essential texinfo libx11-dev libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libgtk2.0-dev libgtk-3-dev libncurses-dev libxpm-dev automake autoconf gnutls 的报错： sudo apt-get install gnutls-dev 执行 make make &amp;amp;&amp;amp; make install 如果遇到依赖问题： sudo apt-get install make 添加软连接 ln -s /opt/emacs/bin/emacs /usr/bin/emacs 下面给出我写好的</description>
+    </item>
+    
+    <item>
+      <title>Hexo&#43;GithubPages 非常简单易行的搭建个人博客</title>
+      <link>https://bitnut.github.io/posts/hexoblog/</link>
+      <pubDate>Sun, 29 Jul 2018 09:45:55 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/hexoblog/</guid>
+      <description>前言：搭建博客要自己打代码吗？ 开始动手：搭建博客的步骤 个性化：更换主题！！ 写博客：初识 markdown 语法 倒腾主题 前言 搭建博客难吗？ 看完这篇你就知道有多简单 :P 搭建个人博客需要自己打代码吗？ 想要美美哒，肯定是要一点的啊:disappointed_relieved: 但是说白咯，搭建博客和做程序一个道理：个人的时间和精</description>
+    </item>
+    
+  </channel>
+</rss>

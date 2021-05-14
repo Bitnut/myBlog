@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>三口一个瓜的博客</title>
+    <link>https://bitnut.github.io/</link>
+    <description>Recent content on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 12 May 2021 13:00:28 +0800</lastBuildDate><atom:link href="https://bitnut.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux Awk 入门（02）</title>
+      <link>https://bitnut.github.io/posts/linux-awk2/</link>
+      <pubDate>Wed, 12 May 2021 13:00:28 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/linux-awk2/</guid>
+      <description>前言 根据上文，我们了解到了 awk 的基本特性和书写方式。这一章，我们开始深入 awk 编程。 仔细思考 awk 的核心思路我们可以发现，我们在 awk 中聚焦的核心是 记录 以及 处理记录，而针对记录，如果我们可以筛选出我们需要的记录，那么无论是程序的执行次数还是编程复杂度都会大大降低。 那么，如何使用 awk 筛选出合适的记录呢？ 一、 基础语法 首</description>
+    </item>
+    
+    <item>
+      <title>Linux Awk 入门（01）</title>
+      <link>https://bitnut.github.io/posts/linux-awk/</link>
+      <pubDate>Wed, 21 Apr 2021 12:00:28 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/linux-awk/</guid>
+      <description>快速入门 awk 一、 awk 的作用、优势和特点 awk 最基础的功能是用作搜索 文件、命令行输出中特定的文本。然后对找到的文本执行指定的操作。 它最大的优势是，它是 linux 等 类 unix 系统下通用的工具，无需额外安装运行时和相关依赖即可使用。而且它 “好读”，“好写” : P。 awk is： refreshingly easy to read and write &amp;ndash; GNU awk get started awk 和其他编程语言的主要区别是，它是数</description>
+    </item>
+    
+    <item>
+      <title>Socks5 协议详解（经典设计）</title>
+      <link>https://bitnut.github.io/posts/socks5-protocal/</link>
+      <pubDate>Mon, 12 Apr 2021 22:13:37 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/socks5-protocal/</guid>
+      <description>简介 socks5 是一个简单的代理协议，它的全称是 SOCKS Protocol Version 5 顾名思义就是第五代的 socks 协议。 socks5 的前身是 socks4, 作为新一代的协议，socks5 肯定是做出了一定的改进，具体是哪些，接下来都会慢慢了解到。 socks5 的正式发布时间是 1996 年 3 月，实际上是非常年长的协议（和我同岁）。它的出现并非是因为对抗众所周知的一些不可抗力，但也是有部分联系</description>
+    </item>
+    
+    <item>
+      <title>解决 http 访问简书图片资源 403 问题</title>
+      <link>https://bitnut.github.io/posts/jianshu403/</link>
+      <pubDate>Sun, 11 Apr 2021 09:44:50 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/jianshu403/</guid>
+      <description>问题起因 最近遇到一个问题，我有些文章放在简书还没有同步过来个人博客上。可就是当我移植过来之后，突然发现图片都显示不出来了。 具体情况如图： 识别问题 经过搜索，发现 403 报错的原因是服务器拒绝了我们的请求。说明我们可能哪儿做错了。 于是我直接在浏览器中发起请求，发现是可以正常拿到资源的。诶？？？ 这是怎么肥事？？</description>
+    </item>
+    
+    <item>
+      <title>解决 hugo 博客框架下 中文简介、评论、扩展配置 的问题</title>
+      <link>https://bitnut.github.io/posts/switchtohugo/</link>
+      <pubDate>Fri, 09 Apr 2021 18:53:13 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/switchtohugo/</guid>
+      <description>前言 前段时间把博客主题切换到了 hugo，但同时也遇到了一些需要自己去折腾的问题。 例如，安装的主题貌似对中文支持不太好，安装的主题没有搭配除了 disqus 以外的评论插件怎么办，流量统计怎么做，安装的主题图片展示效果较差怎么办？ 这篇文章主要就是为了讨论这个问题。 识别问题 以上的问题属于是具体问题。虽然可以具体问题具</description>
+    </item>
+    
+    <item>
+      <title>Linux 下 ‘奇怪’ 的 shell</title>
+      <link>https://bitnut.github.io/posts/linux-strange-shell/</link>
+      <pubDate>Fri, 26 Mar 2021 13:29:14 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/linux-strange-shell/</guid>
+      <description>前言 请原谅我的标题党，这篇文章主要聚焦的是 linux shell 中的引号问题。 如果你正在和 shell 打交道，那么了解 shell 中关于引号的问题是一件很有必要的事情。 下面的这些规则适用的对象是 POSIX 兼容的 shell 例如我们常用的 bash（GNU Bourne-Again Shell）。 注： 注意我的措辞，单独的引号的意思是既可以是单引号也可以是双引号。单引号和双引号就是本来</description>
+    </item>
+    
+    <item>
+      <title>Linux 中的软链接和硬链接</title>
+      <link>https://bitnut.github.io/posts/linux-link/</link>
+      <pubDate>Sun, 21 Mar 2021 17:10:40 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/linux-link/</guid>
+      <description>Linux 中的软链接和硬链接 前言 在 linux 中，硬链接（hard link）和软链接（symbolic link）是两个非常重要的概念，以前上课的时候听老师讲过这两个概念结果后来给忘了。这篇文章将通过实例，加深我们对这两个概念的印象。 了解 inode 在理解软/硬链接之前，我们必需了解一下， linux 里面 存储文件 的方式。 对于 linux 有一定了解的</description>
+    </item>
+    
+    <item>
+      <title>如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）</title>
+      <link>https://bitnut.github.io/posts/ruinyourtscode/</link>
+      <pubDate>Sat, 20 Mar 2021 19:11:51 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/ruinyourtscode/</guid>
+      <description>如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋） If builders built buildings the way programmers write programs, then the first woodpecker that came along would destroy civilization. ~ Gerald Weinberg (born: 1933-10-27 age: 77) Weinberg’s Second Law 前言 这篇文章主要来介绍一些毁掉你 ts 代码的方法。(doge 正文 TS 特性 不封装代码： 调用者需要知道被调用的所有的细节。 接口包装，包装，包装： TS 的 Utility Types 和继承特性让我快乐起来，尽量多包</description>
+    </item>
+    
+    <item>
+      <title>代理实践纪录</title>
+      <link>https://bitnut.github.io/posts/proxy-config/</link>
+      <pubDate>Thu, 04 Mar 2021 21:00:35 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/proxy-config/</guid>
+      <description>变化的 GFW 实在是令人很苦恼 在开发和学习的过程中，飞机始终是我们的好朋友。为了不在一些特别的时刻偶尔的失去他，我们也需要不断变化和学习和改进。 配置 Trojan 服务 一、 准备一台 VPS（境外），不需要购买域名和配置证书。 二、 VPS 安装 LINUX 系统. 注意，系统最好是以下几个。其他的发行版本没有做过测试。 ubuntu 16.04+ debian 9 centos 7+ 三、 替换镜像源</description>
+    </item>
+    
+    <item>
+      <title>Linux 下的 ps 命令和常用组合</title>
+      <link>https://bitnut.github.io/posts/linux-ps/</link>
+      <pubDate>Fri, 19 Feb 2021 21:53:55 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/linux-ps/</guid>
+      <description>前言 总结整理一下简单、常用的 ps 命令用法。 一、查看进程 命令： ps 命令解释： 全称是 process status ，使用它相当于在 win 下的 任务管理器。 常用命令参数： -a 显示同一终端下的所有程序 -e 等于“-A” -e 显示环境变量 -f 显示程序间的关系 -r 显示当前终端的进程 -u 指定用户的所有进程 常用命令组合： -au 显示较详细的资讯 -aux 显示所有包含其他使用者的行</description>
+    </item>
+    
+    <item>
+      <title>编译安装 emacs</title>
+      <link>https://bitnut.github.io/posts/emacs-build/</link>
+      <pubDate>Fri, 19 Feb 2021 21:53:55 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/emacs-build/</guid>
+      <description>走个流程 源码下载 到 emacs 的官网下载安装包 当我写这篇博客的时候，emacs 的最新稳定版是 27.1 解压安装包 xz -d emacs-27.1.tar.xz tar -xvf emacs-27.1.tar 配置安装选项 ./configure --prefix=/opt/emacs/ --with-mailutils --with-pop &amp;gt;/dev/null 2&amp;gt;&amp;amp;1 可能会遇到一些依赖保错 可以执行： X toolkit 的报错： sudo apt-get install build-essential texinfo libx11-dev libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libgtk2.0-dev libgtk-3-dev libncurses-dev libxpm-dev automake autoconf gnutls 的报错： sudo apt-get install gnutls-dev 执行 make make &amp;amp;&amp;amp; make install 如果遇到依赖问题： sudo apt-get install make 添加软连接 ln -s /opt/emacs/bin/emacs /usr/bin/emacs 下面给出我写好的</description>
+    </item>
+    
+    <item>
+      <title>认识 Linux 下的 TTY</title>
+      <link>https://bitnut.github.io/posts/linux-tty/</link>
+      <pubDate>Thu, 18 Feb 2021 16:34:47 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/linux-tty/</guid>
+      <description>linux 下的 tty/pty/pts/ptmx (linux 概念系列) tty 是什么？ 在类 unix 系统中， tty 可以被看作是一个命令，但在更常见的情形下， tty 被认为是终端的代称。 tty 在作为命令的情形 随便打开几个终端看看，可以看到下图： 可以看到，输出的结果是一段地址，紧接着， cd 到这个地址下查看： 在 /dev/pts 这个地址下，有几个文件，分别是： 0 / 1 / 2 / 3 / ptmx 几个文件是啥意思？ 在 Linux</description>
+    </item>
+    
+    <item>
+      <title>NVM 报 ls-remote command results in “N/A 错误</title>
+      <link>https://bitnut.github.io/posts/nvm-error/</link>
+      <pubDate>Fri, 15 Jan 2021 22:20:01 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/nvm-error/</guid>
+      <description>NVM 报 ls-remote command results in “N/A 错误 今天工作中使用 nvm 升级 node 版本遇到了这个错误，经过一番研究终于解决。 出现这个报错的原因有许多种，我遇到的报错实际上是由代理引起。 参考： https://stackoverflow.com/questions/26476744/nvm-ls-remote-command-results-in-n-a 几种原因： SSL 证书过期 临时解决方案： 请使用导出用于抓取内容的镜像的非https版本：export NVM_NODEJS_ORG_MIRROR=http://nodejs.org/dist 长久解决方案： 第一种：若您运行curl $NVM_NODEJS_ORG_MIRROR 回答翻译</description>
+    </item>
+    
+    <item>
+      <title>webpack 配置错误拾遗</title>
+      <link>https://bitnut.github.io/posts/webpack-error-collect/</link>
+      <pubDate>Thu, 14 Jan 2021 22:20:01 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/webpack-error-collect/</guid>
+      <description>1. ... 展开运算符错误 错误原因： 早期的 babel 有许多问题，一些早期的版本（可能现在也没有解决）无法识别的语法、运算符可以通过插件的形式给 babel 打补丁，这里就是其中一种。 Just install babel-plugin-transform-object-rest-spread module. https://www.npmjs.com/package/babel-plugin-transform-object-rest-spread Then add it to .babelrc: &amp;ldquo;plugins&amp;rdquo;: [ &amp;ldquo;babel-plugin-transform-object-rest-spread&amp;rdquo;, ], 2. newwebpack No data received ERR_EMPTY_RESPONSE 错误 给 webpack-dev-server 添加 &amp;ndash;host xxxxxxxx(设好的 host 映射，或者指定的域名)</description>
+    </item>
+    
+    <item>
+      <title>解决按钮移动动画伴随光标样式抖动的问题</title>
+      <link>https://bitnut.github.io/posts/icontransform/</link>
+      <pubDate>Thu, 30 Apr 2020 00:01:55 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/icontransform/</guid>
+      <description>问题描述 最近在工作中遇到了一个很奇怪的问题，网站的页面大部分按钮和卡片都有一个向上移动的过渡动画，当鼠标悬浮在这些元素上的时候，动画会触发并在一定时间内缓缓完成、同时鼠标样式变成 pointer，。 但是问题在于这个效果的实现并不理想。鼠标要是从左右两边和上边移入按钮或者卡片的话这个效果是看不出啥问题的</description>
+    </item>
+    
+    <item>
+      <title>如何简单粗暴地让网页变黑白？</title>
+      <link>https://bitnut.github.io/posts/blackwhite/</link>
+      <pubDate>Tue, 14 Apr 2020 22:31:55 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/blackwhite/</guid>
+      <description>很久没有更新博客了，而且前段时间也在忙着找工作，到现在才新入职两天T.T，今天开始重新更新个人博客了。 今天主要来探讨一下让页面变黑白效果的方法 今年早些时候，新冠疫情给国内造成了巨大损失。因此在今年四月四的时候，为了叨念逝者、寄托哀思，国内不仅暂停了大部分娱乐活动，而且各大门户网站、视频网站，都对首页</description>
+    </item>
+    
+    <item>
+      <title>Hexo&#43;GithubPages 非常简单易行的搭建个人博客</title>
+      <link>https://bitnut.github.io/posts/hexoblog/</link>
+      <pubDate>Sun, 29 Jul 2018 09:45:55 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/hexoblog/</guid>
+      <description>前言：搭建博客要自己打代码吗？ 开始动手：搭建博客的步骤 个性化：更换主题！！ 写博客：初识 markdown 语法 倒腾主题 前言 搭建博客难吗？ 看完这篇你就知道有多简单 :P 搭建个人博客需要自己打代码吗？ 想要美美哒，肯定是要一点的啊:disappointed_relieved: 但是说白咯，搭建博客和做程序一个道理：个人的时间和精</description>
+    </item>
+    
+    <item>
+      <title>浅谈《周易》</title>
+      <link>https://bitnut.github.io/posts/zhouyi/</link>
+      <pubDate>Sat, 21 Jul 2018 01:07:19 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/zhouyi/</guid>
+      <description>周易的现实意义 《周易》是我国的独特文化结晶，也称作《易经》，是《三易》之一、儒门圣典。《周易》在创始之初就试图从天、神性的角度说明做某件事情的合理性。而这正是古代生产力落后的典型作法，古代人类通过用龟壳、蓍草、铜钱、竹签、纸牌或占星等手段和征兆来推断未来的吉凶祸福，为指点前途命运、抚慰心灵着想。 周易</description>
+    </item>
+    
+    <item>
+      <title>CryptDB  简单原理论述</title>
+      <link>https://bitnut.github.io/posts/cryptdb1/</link>
+      <pubDate>Mon, 11 Sep 2017 08:52:53 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/cryptdb1/</guid>
+      <description>博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明 详细论述 CryptDB 的原理 1.面对threat 1 解决方案：通过把对数据库进行的操作（选择，连接，投影等操作）进行特殊处理，使得这些操作能够执行在已加密的数据上 这种解决方案存在的一大问题就是，目前还没有研究出一种加密方式，使得任何执行在数据库上的操作，都能正确运行在加</description>
+    </item>
+    
+    <item>
+      <title>详细论述 CryptDB 的原理</title>
+      <link>https://bitnut.github.io/posts/cryptdb2/</link>
+      <pubDate>Mon, 11 Sep 2017 08:52:18 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/cryptdb2/</guid>
+      <description>版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥 博主写的 CryptDB 另外几篇相关文章： cryptdb 安装及使用说明 CryptDB 简单原理论述 相关资料 想要理解CryptDB, 你可能需要阅读如下资料： CryptDB. Popa, R. A., et al. (2011). CryptDB: protecting confidentiality with encrypted query processing. 文章链接 Guidelines for Using the CryptDB System Securely 链接 其他可能有用的资源: CryptDB 有软件的下载和使用介绍。 GitHub - CryptDB/cryptdb: A database system that can process SQL queries over encrypted data.</description>
+    </item>
+    
+    <item>
+      <title>cryptdb 安装及使用说明</title>
+      <link>https://bitnut.github.io/posts/cryptdb-install/</link>
+      <pubDate>Mon, 07 Aug 2017 20:44:51 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/cryptdb-install/</guid>
+      <description>版权声明：本文为博主原创文章，欢迎转载；转载请注明来自 瓜哥：D 博主写的 CryptDB 另外几篇相关文章： CryptDB 简单原理论述 详细论述 CryptDB 的原理 这个暑假的数据库实训内容，研究的项目背景下面会介绍～ 背景资料 Popa, R.A 在 MIT 攻读博士时发明了 CryptDB; 后来这个数据库方案迅速被微软和谷歌等知名企业采用和学习; 作者毕业后自己创立了公司PreVeil</description>
+    </item>
+    
+    <item>
+      <title>关于我</title>
+      <link>https://bitnut.github.io/posts/abo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/abo/</guid>
+      <description>关于我 你好，我是三口一个瓜。你也可以叫我瓜。这里是我的博客，日常记录和抒情的场所。 我是一名程序员，emacs 爱好者，平时喜欢健身、跑步, 同时我也是一名口琴初学者。 我现在居住和工作在 中国，深圳。如果想要联系我，请发 email。 Hi, I am Bitnut. Here&amp;rsquo;s my blog, where I record my life and feelings. I&amp;rsquo;m a programmer, emacser, runner, body builder and a harmonica player. I am now living and working in Shenzhen, China. If you wanna get</description>
+    </item>
+    
+    <item>
+      <title>联系方式</title>
+      <link>https://bitnut.github.io/posts/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/contact/</guid>
+      <description>Email: 940095072@qq.com Phone: 13427520205 Github: Bitnut QQ: 940095072 微信: h940095072 邮寄地址 中国 China 广东省深圳市 西丽街道，松坪山路，松坪村菊园</description>
+    </item>
+    
+  </channel>
+</rss>

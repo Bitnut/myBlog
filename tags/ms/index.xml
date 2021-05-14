@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MS on 三口一个瓜的博客</title>
+    <link>https://bitnut.github.io/tags/ms/</link>
+    <description>Recent content in MS on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 20 Mar 2021 19:11:51 +0800</lastBuildDate><atom:link href="https://bitnut.github.io/tags/ms/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）</title>
+      <link>https://bitnut.github.io/posts/ruinyourtscode/</link>
+      <pubDate>Sat, 20 Mar 2021 19:11:51 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/ruinyourtscode/</guid>
+      <description>如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋） If builders built buildings the way programmers write programs, then the first woodpecker that came along would destroy civilization. ~ Gerald Weinberg (born: 1933-10-27 age: 77) Weinberg’s Second Law 前言 这篇文章主要来介绍一些毁掉你 ts 代码的方法。(doge 正文 TS 特性 不封装代码： 调用者需要知道被调用的所有的细节。 接口包装，包装，包装： TS 的 Utility Types 和继承特性让我快乐起来，尽量多包</description>
+    </item>
+    
+  </channel>
+</rss>

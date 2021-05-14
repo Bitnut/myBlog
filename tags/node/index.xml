@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>node on 三口一个瓜的博客</title>
+    <link>https://bitnut.github.io/tags/node/</link>
+    <description>Recent content in node on 三口一个瓜的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 20 Mar 2021 19:11:51 +0800</lastBuildDate><atom:link href="https://bitnut.github.io/tags/node/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋）</title>
+      <link>https://bitnut.github.io/posts/ruinyourtscode/</link>
+      <pubDate>Sat, 20 Mar 2021 19:11:51 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/ruinyourtscode/</guid>
+      <description>如何写出无法维护的 TS 代码（挫败 Microsoft 试图接管 javascript 的阴谋） If builders built buildings the way programmers write programs, then the first woodpecker that came along would destroy civilization. ~ Gerald Weinberg (born: 1933-10-27 age: 77) Weinberg’s Second Law 前言 这篇文章主要来介绍一些毁掉你 ts 代码的方法。(doge 正文 TS 特性 不封装代码： 调用者需要知道被调用的所有的细节。 接口包装，包装，包装： TS 的 Utility Types 和继承特性让我快乐起来，尽量多包</description>
+    </item>
+    
+    <item>
+      <title>NVM 报 ls-remote command results in “N/A 错误</title>
+      <link>https://bitnut.github.io/posts/nvm-error/</link>
+      <pubDate>Fri, 15 Jan 2021 22:20:01 +0800</pubDate>
+      
+      <guid>https://bitnut.github.io/posts/nvm-error/</guid>
+      <description>NVM 报 ls-remote command results in “N/A 错误 今天工作中使用 nvm 升级 node 版本遇到了这个错误，经过一番研究终于解决。 出现这个报错的原因有许多种，我遇到的报错实际上是由代理引起。 参考： https://stackoverflow.com/questions/26476744/nvm-ls-remote-command-results-in-n-a 几种原因： SSL 证书过期 临时解决方案： 请使用导出用于抓取内容的镜像的非https版本：export NVM_NODEJS_ORG_MIRROR=http://nodejs.org/dist 长久解决方案： 第一种：若您运行curl $NVM_NODEJS_ORG_MIRROR 回答翻译</description>
+    </item>
+    
+  </channel>
+</rss>
